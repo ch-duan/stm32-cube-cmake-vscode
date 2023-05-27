@@ -550,11 +550,15 @@ def parse_and_generate(projectFolderBasePath, args):
             paths = []
             for path in data_obj['confs'][conf][compiler]['incl_paths']:
                 path = path.replace('${ProjDirPath}', CProjBasePath)
+                path = path.replace('"${workspace_loc:/${ProjName}/', '')
+                path = path.replace('workspace_loc:', '').replace('', '')
+                path = path.replace('${ProjName}', '')
+                path = path.replace('}"', '')
+                path = path.replace('../', '')
                 if not os.path.isabs(path):
                     # We are here adding "Debug" fake name (for relativep paths only)
                     # because "cwd" path for CubeIDE is "<location_of_.cproject>/Debug"
-                    path = os.path.join(os.path.join(
-                        CProjBasePath, 'Debug'), path)
+                    path = os.path.join(CProjBasePath, path)
 
                 # Normalize path to remove "Debug" from path
                 paths.append(os.path.normpath(path))
