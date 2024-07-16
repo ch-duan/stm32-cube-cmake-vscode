@@ -18,6 +18,8 @@ set(linker_script_SRC ${linker_script_SRC}
     {{sr:linker_script_SRC}}
 )
 
+set(include_common_DIRS ${include_common_DIRS}
+)
 # Sources
 set(sources_SRCS ${sources_SRCS}
     {{sr:sources_SRCS}}
