@@ -117,15 +117,19 @@ target_link_options(${CMAKE_PROJECT_NAME} PRIVATE
     ${linker_OPTS}
     -Wl,-Map=${CMAKE_PROJECT_NAME}.map
     -u _printf_float # STDIO float formatting support (remove if not used)
-    --specs=nosys.specs
+    --specs=nosys.specs     #系统
+    -Wl,--cref
+    -Wl,--gc-sections
+    -static
+    -Wl,--undefined=uxTopUsedPriority
     -Wl,--start-group
     -lc
     -lm
     -lstdc++
     -lsupc++
     -Wl,--end-group
-    -Wl,-z,max-page-size=8 # Allow good software remapping across address space (with proper GCC section making)
     -Wl,--print-memory-usage
+    # -Wl,-z,max-page-size=8 # Allow good software remapping across address space (with proper GCC section making)
 )
 
 # Execute post-build to print size
